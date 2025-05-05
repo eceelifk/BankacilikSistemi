@@ -24,7 +24,7 @@ public:
     void paraYatir(double miktar) {
         if (miktar > 0) {
             bakiye += miktar;
-            islemler.push_back(getZaman() + " | +" + to_string(miktar) + " TL yatýrýldý.");
+            islemler.push_back(getZaman() + " | +" + to_string(miktar) + " TL yatirildi.");
             cout << "Yeni bakiye: " << bakiye << " TL\n";
         } else {
             cout << "Geçersiz miktar!\n";
@@ -47,7 +47,7 @@ public:
             islemler.push_back(getZaman() + " | +" + to_string(miktar) + " TL kredi çekildi.");
             cout << "Yeni bakiye: " << bakiye << " TL\n";
         } else {
-            cout << "Geçersiz kredi miktarý!\n";
+            cout << "Geçersiz kredi miktari!\n";
         }
     }
 
@@ -57,7 +57,7 @@ public:
             alici.bakiye += miktar;
             islemler.push_back(getZaman() + " | -" + to_string(miktar) + " TL gönderildi --> Hesap No: " + to_string(alici.getHesapNo()));
             alici.islemler.push_back(getZaman() + " | +" + to_string(miktar) + " TL alýndý <-- Hesap No: " + to_string(this->hesapNo));
-            cout << miktar << " TL baþarýyla gönderildi.\n";
+            cout << miktar << " TL basariyla gönderildi.\n";
         } else {
             cout << "Yetersiz bakiye veya geçersiz miktar!\n";
         }
@@ -65,15 +65,15 @@ public:
 
     void hesapBilgileri() {
         cout << "\n--- Hesap Bilgileri ---\n";
-        cout << "Müþteri Adý: " << musteriAdi << endl;
+        cout << "Müsteri Adi: " << musteriAdi << endl;
         cout << "Hesap No: " << hesapNo << endl;
         cout << "Bakiye: " << bakiye << " TL\n";
     }
 
     void islemGecmisi() {
-        cout << "\n--- Ýþlem Geçmiþi ---\n";
+        cout << "\n--- İslem Geçmisi ---\n";
         if (islemler.empty()) {
-            cout << "Henüz iþlem yok.\n";
+            cout << "Henüz islem yok.\n";
         } else {
             for (const string &islem : islemler) {
                 cout << islem << endl;
@@ -103,11 +103,11 @@ int main() {
     string sifreGirisi;
     const string sistemSifresi = "1234";
 
-    cout << "=== Bankacýlýk Sistemine Hoþ Geldiniz ===\nÞifreyi girin: ";
+    cout << "=== Bankacilik Sistemine Hos Geldiniz ===\nSifreyi girin: ";
     cin >> sifreGirisi;
 
     if (sifreGirisi != sistemSifresi) {
-        cout << "Hatalý þifre. Programdan çýkýlýyor.\n";
+        cout << "Hatali sifre.\n";
         return 0;
     }
 
@@ -115,7 +115,7 @@ int main() {
     int secim;
 
    
-    cout << "\n--- Deneme Baþlatýlýyor ---\n";
+    cout << "\n--- Deneme Baslatiliyor ---\n";
 
   
     hesaplar.push_back(Hesap("Elif", 1001));
@@ -142,36 +142,36 @@ int main() {
     hesapElif->krediCek(500);
 
 
-    cout << "\nElif'in Güncel Ýþlem Geçmiþi:\n";
+    cout << "\nElif'in Güncel İslem Geçmisi:\n";
     hesapElif->islemGecmisi();
 
    
     do {
         cout << "\n--- Ana Menü ---\n";
-        cout << "1. Yeni Hesap Oluþtur\n";
+        cout << "1. Yeni Hesap Olustur\n";
         cout << "2. Hesaba Giriþ Yap\n";
-        cout << "3. Çýkýþ\n";
+        cout << "3. Çikis\n";
         cout << "Seçiminiz: ";
         cin >> secim;
 
         if (secim == 1) {
             string ad;
             int no;
-            cout << "Müþteri adý: ";
+            cout << "Müsteri adi: ";
             cin.ignore(); getline(cin, ad);
-            cout << "Yeni hesap numarasý: ";
+            cout << "Yeni hesap numarasi: ";
             cin >> no;
             if (hesapBul(hesaplar, no)) {
-                cout << "Bu hesap numarasý zaten mevcut!\n";
+                cout << "Bu hesap numarasi zaten mevcut!\n";
             } else {
                 hesaplar.push_back(Hesap(ad, no));
-                cout << "Hesap baþarýyla oluþturuldu!\n";
+                cout << "Hesap basariyla olusturuldu!\n";
             }
         }
 
         else if (secim == 2) {
             int no;
-            cout << "Hesap numarasý: ";
+            cout << "Hesap numarasi: ";
             cin >> no;
             Hesap* aktifHesap = hesapBul(hesaplar, no);
             if (!aktifHesap) {
@@ -180,13 +180,13 @@ int main() {
                 int sec;
                 do {
                     cout << "\n--- Hesap Menüsü ---\n";
-                    cout << "1. Para Yatýr\n";
+                    cout << "1. Para Yatir\n";
                     cout << "2. Para Çek\n";
                     cout << "3. Hesap Bilgileri\n";
-                    cout << "4. Ýþlem Geçmiþi\n";
+                    cout << "4. İslem Geçmisi\n";
                     cout << "5. Para Gönder\n";
                     cout << "6. Kredi Çek\n";
-                    cout << "7. Çýkýþ Yap\n";
+                    cout << "7. Çikis Yap\n";
                     cout << "Seçiminiz: ";
                     cin >> sec;
                     double miktar;
@@ -194,7 +194,7 @@ int main() {
 
                     switch (sec) {
                         case 1:
-                            cout << "Yatýrýlacak miktar: ";
+                            cout << "Yatirilacak miktar: ";
                             cin >> miktar;
                             aktifHesap->paraYatir(miktar);
                             break;
@@ -210,23 +210,23 @@ int main() {
                             aktifHesap->islemGecmisi();
                             break;
                         case 5:
-                            cout << "Gönderilecek hesap numarasý: ";
+                            cout << "Gönderilecek hesap numarasi: ";
                             cin >> hedefNo;
                             cout << "Miktar: ";
                             cin >> miktar;
                             if (Hesap* alici = hesapBul(hesaplar, hedefNo)) {
                                 aktifHesap->paraGonder(*alici, miktar);
                             } else {
-                                cout << "Alýcý hesap bulunamadý!\n";
+                                cout << "Alici hesap bulunamadi!\n";
                             }
                             break;
                         case 6:
-                            cout << "Kredi miktarý: ";
+                            cout << "Kredi miktari: ";
                             cin >> miktar;
                             aktifHesap->krediCek(miktar);
                             break;
                         case 7:
-                            cout << "Hesaptan çýkýlýyor...\n";
+                            cout << "Hesaptan çikiliyor...\n";
                             break;
                         default:
                             cout << "Geçersiz seçim!\n";
@@ -237,7 +237,7 @@ int main() {
 
     } while (secim != 3);
 
-    cout << "Programdan çýkýlýyor. Görüþmek üzere!\n";
+    cout << "Programdan çikiliyor. Görüsmek üzere!\n";
     return 0;
 }
 
